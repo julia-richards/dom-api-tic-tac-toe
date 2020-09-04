@@ -8,9 +8,25 @@
 //- can call the click on each ind square
 
 window.addEventListener("DOMContentLoaded", () => {
-	const squareClass = document.querySelectorAll(".square");
+    //Top-leve Variables
 	let counter = 0; //          //
-	let sqrArray = ["", "", "", "", "", "", "", "", ""];
+    let sqrArray = ["", "", "", "", "", "", "", "", ""];
+    let gameStatus = '';
+    
+    
+
+        //Tie checker Function
+    function tieChecker() {
+        for (let i = 0; i < sqrArray.length; i++) {
+            if (gameStatus === '' && sqrArray[i] !== '') {
+                console.log("It's a tie!!");
+
+            }
+        }
+    }
+    
+    //////////Phase 2 ///////////
+	const squareClass = document.querySelectorAll(".square");
 	squareClass.forEach((square) => {
 		square.addEventListener("click", (e) => {
 			const clickedSquare = e.target.id[e.target.id.length - 1];
@@ -34,71 +50,72 @@ window.addEventListener("DOMContentLoaded", () => {
 				sqrArray[clickedSquare] = "o";
 			}
 			counter++;
-			console.log(sqrArray);
-			determineWinner();
+            console.log(sqrArray);
+            //create function to see if the board is full 
+            //if board is full, and checkGameStatus function hasn't returned a winner, then return a tie
+            checkGameStatus();
+            tieChecker();
+            console.log(gameStatus);
 		});
 	});
 
 	/////////Phase 3 ////////////////
 
-	const determineWinner = (array) => {
+	const checkGameStatus = (array) => {
 		if (
 			sqrArray[0] === sqrArray[1] &&
 			sqrArray[1] === sqrArray[2] &&
 			sqrArray[2] !== ""
 		) {
-			console.log("Winner!!");
+			gameStatus = sqrArray[0].toUpperCase();
 		} else if (
 			sqrArray[3] === sqrArray[4] &&
 			sqrArray[4] === sqrArray[5] &&
 			sqrArray[5] !== ""
 		) {
-			console.log("Winner!!");
+			gameStatus = sqrArray[3].toUpperCase();
 		} else if (
 			sqrArray[6] === sqrArray[7] &&
 			sqrArray[7] === sqrArray[8] &&
 			sqrArray[8] !== ""
 		) {
-			console.log("Winner!!");
+			gameStatus = sqrArray[6].toUpperCase();
 		} else if (
 			sqrArray[0] === sqrArray[3] &&
 			sqrArray[3] === sqrArray[6] &&
 			sqrArray[6] !== ""
 		) {
-			console.log("Winner");
+			gameStatus = sqrArray[0].toUpperCase();
 		} else if (
 			sqrArray[1] === sqrArray[4] &&
 			sqrArray[4] === sqrArray[7] &&
 			sqrArray[7] !== ""
 		) {
-			console.log("Winner!!");
+			gameStatus = sqrArray[1].toUpperCase();
 		} else if (
 			sqrArray[2] === sqrArray[5] &&
 			sqrArray[5] === sqrArray[8] &&
 			sqrArray[8] !== ""
 		) {
-			console.log("Lucky Win!");
+			gameStatus = sqrArray[2].toUpperCase();
 		} else if (
 			sqrArray[0] === sqrArray[4] &&
 			sqrArray[4] === sqrArray[8] &&
 			sqrArray[8] !== ""
 		) {
-			console.log("Winner!!");
+			gameStatus = sqrArray[0].toUpperCase();
 		} else if (
 			sqrArray[2] === sqrArray[4] &&
 			sqrArray[4] === sqrArray[6] &&
 			sqrArray[6] !== ""
 		) {
-			console.log("Winner!!");
-		} else {
-		}
-		for (let i = 0; i < sqrArray.length; i++) {
-			if (sqrArray[i] !== "") {
-				// return true;
-				console.log("You guys tied!");
-			}
-			return false;
-		}
+			gameStatus = sqrArray[2].toUpperCase();
+        } 
+        else {
+            console.log("Continue playing");
+        }
+        
+	
 
 		//check to make sure that none of the array indices are an empty string -only way to tie
 		//do in a for loop?
