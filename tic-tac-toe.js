@@ -10,12 +10,26 @@
 window.addEventListener("DOMContentLoaded", () => {
 	const squareClass = document.querySelectorAll(".square");
 	let counter = 0;
-
+    let sqrArray = ['','','','','','','','',''];
 	squareClass.forEach((square) => {
 		square.addEventListener("click", (e) => {
-			const xImg = document.createElement("img");
-			xImg.src = "player-x.svg";
-			e.target.style.backgroundImage;
-		});
-	});
+            if(e.target.style.backgroundImage){
+            return 
+            }
+            if(counter % 2 ===0) {
+                e.target.style.backgroundImage = "url('/player-x.svg')";
+                sqrArray.pop();
+                sqrArray.unshift('x');
+            }
+            else {
+                e.target.style.backgroundImage = "url('/player-o.svg')";
+                sqrArray.pop();
+                sqrArray.unshift('o');
+            }
+            counter++;
+            console.log(sqrArray);
+        })
+		
+	
+})
 });
