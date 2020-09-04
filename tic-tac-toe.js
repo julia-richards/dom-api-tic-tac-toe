@@ -8,24 +8,30 @@
 //- can call the click on each ind square
 
 window.addEventListener("DOMContentLoaded", () => {
-    //Top-leve Variables
+	//Top-leve Variables
 	let counter = 0; //          //
-    let sqrArray = ["", "", "", "", "", "", "", "", ""];
-    let gameStatus = '';
-    
-    
+	let sqrArray = ["", "", "", "", "", "", "", "", ""];
+	let gameFull = 0;
+	let gameStatus = "";
+	const gameStatusDiv = document.getElementById("game-status");
 
-        //Tie checker Function
-    function tieChecker() {
-        for (let i = 0; i < sqrArray.length; i++) {
-            if (gameStatus === '' && sqrArray[i] !== '') {
-                console.log("It's a tie!!");
+	//Tie checker Function
+	function tieChecker() {
+		for (let i = 0; i < sqrArray.length; i++) {
+			if (sqrArray[i] === "x" || sqrArray[i] === "o") {
+				gameFull++;
+			}
 
-            }
-        }
-    }
-    
-    //////////Phase 2 ///////////
+			if (gameStatus === "" && gameFull === 9) {
+				//iterate through entire array before console.logging it's a tie
+				//inside of array we don't
+				gameStatusDiv.innerHTML = "It's a Tie :(";
+			}
+			return;
+		}
+	}
+
+	//////////Phase 2 ///////////
 	const squareClass = document.querySelectorAll(".square");
 	squareClass.forEach((square) => {
 		square.addEventListener("click", (e) => {
@@ -50,12 +56,12 @@ window.addEventListener("DOMContentLoaded", () => {
 				sqrArray[clickedSquare] = "o";
 			}
 			counter++;
-            console.log(sqrArray);
-            //create function to see if the board is full 
-            //if board is full, and checkGameStatus function hasn't returned a winner, then return a tie
-            checkGameStatus();
-            tieChecker();
-            console.log(gameStatus);
+			console.log(sqrArray);
+			//create function to see if the board is full
+			//if board is full, and checkGameStatus function hasn't returned a winner, then return a tie
+			checkGameStatus();
+			tieChecker();
+			console.log(gameStatus);
 		});
 	});
 
@@ -68,54 +74,59 @@ window.addEventListener("DOMContentLoaded", () => {
 			sqrArray[2] !== ""
 		) {
 			gameStatus = sqrArray[0].toUpperCase();
+			gameStatusDiv.innerHTML = `Winner ${gameStatus}`;
 		} else if (
 			sqrArray[3] === sqrArray[4] &&
 			sqrArray[4] === sqrArray[5] &&
 			sqrArray[5] !== ""
 		) {
 			gameStatus = sqrArray[3].toUpperCase();
+			gameStatusDiv.innerHTML = `Winner ${gameStatus}`;
 		} else if (
 			sqrArray[6] === sqrArray[7] &&
 			sqrArray[7] === sqrArray[8] &&
 			sqrArray[8] !== ""
 		) {
 			gameStatus = sqrArray[6].toUpperCase();
+			gameStatusDiv.innerHTML = `Winner ${gameStatus}`;
 		} else if (
 			sqrArray[0] === sqrArray[3] &&
 			sqrArray[3] === sqrArray[6] &&
 			sqrArray[6] !== ""
 		) {
 			gameStatus = sqrArray[0].toUpperCase();
+			gameStatusDiv.innerHTML = `Winner ${gameStatus}`;
 		} else if (
 			sqrArray[1] === sqrArray[4] &&
 			sqrArray[4] === sqrArray[7] &&
 			sqrArray[7] !== ""
 		) {
 			gameStatus = sqrArray[1].toUpperCase();
+			gameStatusDiv.innerHTML = `Winner ${gameStatus}`;
 		} else if (
 			sqrArray[2] === sqrArray[5] &&
 			sqrArray[5] === sqrArray[8] &&
 			sqrArray[8] !== ""
 		) {
 			gameStatus = sqrArray[2].toUpperCase();
+			gameStatusDiv.innerHTML = `Winner ${gameStatus}`;
 		} else if (
 			sqrArray[0] === sqrArray[4] &&
 			sqrArray[4] === sqrArray[8] &&
 			sqrArray[8] !== ""
 		) {
 			gameStatus = sqrArray[0].toUpperCase();
+			gameStatusDiv.innerHTML = `Winner ${gameStatus}`;
 		} else if (
 			sqrArray[2] === sqrArray[4] &&
 			sqrArray[4] === sqrArray[6] &&
 			sqrArray[6] !== ""
 		) {
 			gameStatus = sqrArray[2].toUpperCase();
-        } 
-        else {
-            console.log("Continue playing");
-        }
-        
-	
+			gameStatusDiv.innerHTML = `Winner ${gameStatus}`;
+		} else {
+			console.log("Continue playing");
+		}
 
 		//check to make sure that none of the array indices are an empty string -only way to tie
 		//do in a for loop?
