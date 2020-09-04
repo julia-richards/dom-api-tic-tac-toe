@@ -9,7 +9,7 @@
 
 window.addEventListener("DOMContentLoaded", () => {
 	const squareClass = document.querySelectorAll(".square");
-	let counter = 0;
+	let counter = 0;          //          //
 	let sqrArray = ["", "", "", "", "", "", "", "", ""];
 	squareClass.forEach((square) => {
 		square.addEventListener("click", (e) => {
@@ -36,6 +36,40 @@ window.addEventListener("DOMContentLoaded", () => {
 			}
 			counter++;
 			console.log(sqrArray);
-		});
-	});
+		    });
+    });
+    
+
+    /////////Phase 3 ////////////////
+
+    const determineWinner = array => {
+        if(sqrArray[0] === sqrArray[1] && sqrArray[1] === sqrArray[2] && sqrArray[2] !== '') {
+            console.log('Winner!!');
+        }
+        else if (sqrArray[3] === sqrArray[4] && sqrArray[4] === sqrArray[5] && sqrArray[5] !== '') {
+            console.log("Winner!!")
+        }
+        else if (sqrArray[6] === sqrArray[7] && sqrArray[7] === sqrArray[8] && sqrArray[8] !== '') {
+            console.log("Winner!!");
+        }
+        else if (sqrArray[0] === sqrArray[3] && sqrArray[3] === sqrArray[6] && sqrArray[6] !== '') {
+            console.log("Winner");
+        }
+        else if (sqrArray[1] === sqrArray[4] && sqrArray[4] === sqrArray[7] && sqrArray[7] !== '') {
+            console.log("Winner!!");
+        }
+        else if (sqrArray[2] === sqrArray[5] && sqrArray[5] === sqrArray[8] && sqrArray[8] !== '') {
+            console.log("Lucky Win!");
+        }
+        else if (sqrArray[0] === sqrArray[4] && sqrArray[4] === sqrArray[8] && sqrArray[8] !== '') {
+            console.log("Winner!!");
+        }
+        else if (sqrArray[2] === sqrArray[4] && sqrArray[4] === sqrArray[6] && sqrArray[6] !== '') {
+            console.log("Winner!!");
+        }
+        else {
+            console.log('You guys tied!');
+        }
+    }
+    determineWinner();
 });
