@@ -10,26 +10,32 @@
 window.addEventListener("DOMContentLoaded", () => {
 	const squareClass = document.querySelectorAll(".square");
 	let counter = 0;
-    let sqrArray = ['','','','','','','','',''];
+	let sqrArray = ["", "", "", "", "", "", "", "", ""];
 	squareClass.forEach((square) => {
 		square.addEventListener("click", (e) => {
-            if(e.target.style.backgroundImage){
-            return 
-            }
-            if(counter % 2 ===0) {
-                e.target.style.backgroundImage = "url('/player-x.svg')";
-                sqrArray.pop();
-                sqrArray.unshift('x');
-            }
-            else {
-                e.target.style.backgroundImage = "url('/player-o.svg')";
-                sqrArray.pop();
-                sqrArray.unshift('o');
-            }
-            counter++;
-            console.log(sqrArray);
-        })
-		
+			const clickedSquare = e.target.id[e.target.id.length - 1];
 	
-})
+			if (e.target.style.backgroundImage) {
+				return;
+			}
+			if (counter % 2 === 0) {
+				const img = document.createElement("img");
+				img.src =
+					"https://assets.aaonline.io/Module-DOM-API/formative-project-tic-tac-toe/player-x.svg";
+				e.target.appendChild(img);
+
+				sqrArray[clickedSquare] = "x";
+
+			} else {
+				const img = document.createElement("img");
+				img.src =
+					"https://assets.aaonline.io/Module-DOM-API/formative-project-tic-tac-toe/player-o.svg";
+				e.target.appendChild(img);
+
+				sqrArray[clickedSquare] = "o";
+			}
+			counter++;
+			console.log(sqrArray);
+		});
+	});
 });
