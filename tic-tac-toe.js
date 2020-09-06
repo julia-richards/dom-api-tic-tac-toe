@@ -8,7 +8,7 @@
 //- can call the click on each ind square
 
 window.addEventListener("DOMContentLoaded", () => {
-	//Top-leve Variables
+	//Top-level Variables
 	let counter = 0; //          //
 	let sqrArray = ["", "", "", "", "", "", "", "", ""];
 	let gameFull = 0;
@@ -30,6 +30,20 @@ window.addEventListener("DOMContentLoaded", () => {
 			return;
 		}
 	}
+
+	///New Game///
+	const newGameBtn = document.getElementById("new-game");
+
+	const newGame = () => {
+		if (gameFull === 9 || gameStatus !== "") {
+			newGameBtn.removeAttribute("disabled");
+			newGameBtn.addEventListener("click", (e) => {
+				location.reload();
+			});
+		} else {
+			newGameBtn.disabled = true;
+		}
+	};
 
 	//////////Phase 2 ///////////
 	const squareClass = document.querySelectorAll(".square");
@@ -61,6 +75,7 @@ window.addEventListener("DOMContentLoaded", () => {
 			//if board is full, and checkGameStatus function hasn't returned a winner, then return a tie
 			checkGameStatus();
 			tieChecker();
+			newGame();
 			console.log(gameStatus);
 		});
 	});
